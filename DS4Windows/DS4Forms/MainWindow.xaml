@@ -261,6 +261,9 @@
                         <CheckBox x:Name="runAtStartCk" Content="{lex:Loc RunAtStartup}" Margin="{StaticResource spaceMargin}"
                               IsChecked="{Binding RunAtStartup}"
                               ToolTip="{lex:Loc Resources:RunAtStartup}" Click="RunAtStartCk_Click" />
+                        <CheckBox x:Name="activeAtStartCk" Content="{lex:Loc ActiveAtStartup}" Margin="{StaticResource spaceMargin}"
+                              IsChecked="{Binding ActiveAtStartup}"
+                              ToolTip="{lex:Loc Resources:ActiveAtStartup}" />
                         <GroupBox x:Name="runAsGroupBox" Header="{lex:Loc RunAs}" BorderThickness="2" Visibility="{Binding ShowRunStartPanel}"
                               Margin="{StaticResource spaceMargin}">
                             <StackPanel Orientation="Horizontal">

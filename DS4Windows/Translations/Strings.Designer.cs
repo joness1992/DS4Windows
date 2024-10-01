@@ -115,6 +115,15 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active at Startup.
+        /// </summary>
+        public static string ActiveAtStartup {
+            get {
+                return ResourceManager.GetString("ActiveAtStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Directory.
         /// </summary>
         public static string AddDirectory {

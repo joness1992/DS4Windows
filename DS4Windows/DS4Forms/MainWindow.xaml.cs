@@ -187,12 +187,15 @@ namespace DS4WinWPF.DS4Forms
                 mainWinVM.CheckDrivers();
                 if (!parser.Stop)
                 {
-                    Dispatcher.BeginInvoke((Action)(() =>
+                    if (Global.ActiveAtStartup)
                     {
+                        Dispatcher.BeginInvoke(() =>
+                        {
                         StartStopBtn.IsEnabled = false;
-                    }));
+                        });
                     Thread.Sleep(1000);
                     App.rootHub.Start();
+                    }
                     //root.rootHubtest.Start();
                 }
             });

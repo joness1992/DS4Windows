@@ -70,6 +70,15 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tells Windows to start DS4Windows in an active state.
+        /// </summary>
+        public static string ActiveAtStartup {
+            get {
+                return ResourceManager.GetString("ActiveAtStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding to list....
         /// </summary>
         public static string AddingToList {

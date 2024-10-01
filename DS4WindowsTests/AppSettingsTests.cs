@@ -24,6 +24,7 @@ using System.Xml.Serialization;
 using DS4Windows;
 using DS4WinWPF.DS4Control.DTOXml;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace DS4WindowsTests
 {
@@ -63,6 +64,7 @@ namespace DS4WindowsTests
   <DisconnectBTAtStop>False</DisconnectBTAtStop>
   <SwipeProfiles>True</SwipeProfiles>
   <QuickCharge>False</QuickCharge>
+  <ActiveAtStartup>False</ActiveAtStartup>
   <CloseMinimizes>False</CloseMinimizes>
   <UseLang />
   <DownloadLang>False</DownloadLang>
@@ -130,7 +132,8 @@ namespace DS4WindowsTests
             dto.MapTo(tempStore);
 
             // Check settings
-            DateTime.TryParse(dto.LastCheckString, out DateTime tempLastChecked);
+            string format = "MM/dd/yyyy hh:mm:ss";
+            DateTime.TryParseExact(dto.LastCheckString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tempLastChecked);
             Assert.AreEqual(tempLastChecked, tempStore.lastChecked);
         }
 

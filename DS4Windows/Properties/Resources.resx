@@ -430,6 +430,9 @@
   <data name="RunAtStartup" xml:space="preserve">
     <value>Tells Windows to start DS4Windows after login</value>
   </data>
+  <data name="ActiveAtStartup" xml:space="preserve">
+    <value>Tells Windows to start DS4Windows in an active state</value>
+  </data>
   <data name="SaveRecordedMacro" xml:space="preserve">
     <value>Save Recorded Macro?</value>
   </data>

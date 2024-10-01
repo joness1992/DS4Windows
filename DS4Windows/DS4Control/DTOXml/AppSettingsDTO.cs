@@ -343,6 +343,25 @@ namespace DS4WinWPF.DS4Control.DTOXml
         }
 
         [XmlIgnore]
+        public bool ActiveAtStartup
+        {
+            get; private set;
+        }
+
+        [XmlElement("ActiveAtStartup")]
+        public string ActiveAtStartupString
+        {
+            get => ActiveAtStartup.ToString();
+            set
+            {
+                if (bool.TryParse(value, out bool temp))
+                {
+                    ActiveAtStartup = temp;
+                }
+            }
+        }
+
+        [XmlIgnore]
         public bool CloseMinimizes
         {
             get; private set;
@@ -810,6 +829,7 @@ namespace DS4WinWPF.DS4Control.DTOXml
             DisconnectBTAtStop = source.disconnectBTAtStop;
             SwipeProfiles = source.swipeProfiles;
             QuickCharge = source.quickCharge;
+            ActiveAtStartup = source.activeAtStartup;
             CloseMinimizes = source.closeMini;
             UseLang = source.useLang;
             DownloadLang = source.downloadLang;
@@ -901,7 +921,7 @@ namespace DS4WinWPF.DS4Control.DTOXml
             destination.lastVersionChecked = LastVersionChecked;
             destination.notifications = Notifications;
             destination.disconnectBTAtStop = DisconnectBTAtStop;
-            destination.swipeProfiles = SwipeProfiles;
+            destination.activeAtStartup = ActiveAtStartup;
             destination.quickCharge = QuickCharge;
             destination.closeMini = CloseMinimizes;
             destination.useLang = UseLang;

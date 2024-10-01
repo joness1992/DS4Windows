@@ -1611,6 +1611,12 @@ namespace DS4Windows
             get { return m_Config.quickCharge; }
         }
 
+        public static bool ActiveAtStartup
+        {
+            set { m_Config.activeAtStartup = value; }
+            get { return m_Config.activeAtStartup; }
+        }
+
         public static bool getQuickCharge()
         {
             return m_Config.quickCharge;
@@ -3626,6 +3632,7 @@ namespace DS4Windows
         public bool swipeProfiles = DEFAULT_SWIPE_PROFILES;
         public bool ds4Mapping = false;
         public bool quickCharge = false;
+        public bool activeAtStartup = true;
         public bool closeMini = false;
         public List<SpecialAction> actions = new List<SpecialAction>();
         public List<DS4ControlSettings>[] ds4settings = new List<DS4ControlSettings>[Global.TEST_PROFILE_ITEM_COUNT]
@@ -7700,8 +7707,8 @@ namespace DS4Windows
                         }
                         catch { profilePath[i] = olderProfilePath[i] = string.Empty; distanceProfiles[i] = false; }
                     }
-
-                    try { Item = m_Xdoc.SelectSingleNode("/Profile/LastChecked"); DateTime.TryParse(Item.InnerText, out lastChecked); }
+                    string format = "MM/dd/yyyy hh:mm:ss";
+                    try { Item = m_Xdoc.SelectSingleNode("/Profile/LastChecked"); DateTime.TryParseExact(Item.InnerText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out lastChecked); }
                     catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/CheckWhen"); Int32.TryParse(Item.InnerText, out CheckWhen); }
                     catch { missingSetting = true; }
@@ -7732,6 +7739,8 @@ namespace DS4Windows
                     //try { Item = m_Xdoc.SelectSingleNode("/Profile/UseDS4ForMapping"); Boolean.TryParse(Item.InnerText, out ds4Mapping); }
                     //catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/QuickCharge"); Boolean.TryParse(Item.InnerText, out quickCharge); }
+                    catch { missingSetting = true; }
+                    try { Item = m_Xdoc.SelectSingleNode("/Profile/ActiveAtStartup"); Boolean.TryParse(Item.InnerText, out activeAtStartup); }
                     catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/CloseMinimizes"); Boolean.TryParse(Item.InnerText, out closeMini); }
                     catch { missingSetting = true; }
@@ -8070,7 +8079,7 @@ namespace DS4Windows
                 }
             }
 
-            XmlNode xmlLastChecked = m_Xdoc.CreateNode(XmlNodeType.Element, "LastChecked", null); xmlLastChecked.InnerText = lastChecked.ToString(); rootElement.AppendChild(xmlLastChecked);
+            XmlNode xmlLastChecked = m_Xdoc.CreateNode(XmlNodeType.Element, "LastChecked", null); xmlLastChecked.InnerText = lastChecked.ToString("MM/dd/yyyy hh:mm:ss"); rootElement.AppendChild(xmlLastChecked);
             XmlNode xmlCheckWhen = m_Xdoc.CreateNode(XmlNodeType.Element, "CheckWhen", null); xmlCheckWhen.InnerText = CheckWhen.ToString(); rootElement.AppendChild(xmlCheckWhen);
             if (!string.IsNullOrEmpty(lastVersionChecked))
             {
@@ -8082,6 +8091,7 @@ namespace DS4Windows
             XmlNode xmlSwipeProfiles = m_Xdoc.CreateNode(XmlNodeType.Element, "SwipeProfiles", null); xmlSwipeProfiles.InnerText = swipeProfiles.ToString(); rootElement.AppendChild(xmlSwipeProfiles);
             //XmlNode xmlDS4Mapping = m_Xdoc.CreateNode(XmlNodeType.Element, "UseDS4ForMapping", null); xmlDS4Mapping.InnerText = ds4Mapping.ToString(); rootElement.AppendChild(xmlDS4Mapping);
             XmlNode xmlQuickCharge = m_Xdoc.CreateNode(XmlNodeType.Element, "QuickCharge", null); xmlQuickCharge.InnerText = quickCharge.ToString(); rootElement.AppendChild(xmlQuickCharge);
+            XmlNode xmlActiveAtStartup = m_Xdoc.CreateNode(XmlNodeType.Element, "ActiveAtStartup", null); xmlActiveAtStartup.InnerText = activeAtStartup.ToString(); rootElement.AppendChild(xmlActiveAtStartup);
             XmlNode xmlCloseMini = m_Xdoc.CreateNode(XmlNodeType.Element, "CloseMinimizes", null); xmlCloseMini.InnerText = closeMini.ToString(); rootElement.AppendChild(xmlCloseMini);
             XmlNode xmlUseLang = m_Xdoc.CreateNode(XmlNodeType.Element, "UseLang", null); xmlUseLang.InnerText = useLang.ToString(); rootElement.AppendChild(xmlUseLang);
             XmlNode xmlDownloadLang = m_Xdoc.CreateNode(XmlNodeType.Element, "DownloadLang", null); xmlDownloadLang.InnerText = downloadLang.ToString(); rootElement.AppendChild(xmlDownloadLang);
