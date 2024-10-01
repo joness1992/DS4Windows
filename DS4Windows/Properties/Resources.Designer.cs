@@ -793,6 +793,15 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tells Windows to show a taskbar notification when a controller has a low battery.
+        /// </summary>
+        public static string LowBatteryNotification {
+            get {
+                return ResourceManager.GetString("LowBatteryNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Macro.
         /// </summary>
         public static string Macro {

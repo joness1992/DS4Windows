@@ -65,6 +65,7 @@ namespace DS4WindowsTests
   <SwipeProfiles>True</SwipeProfiles>
   <QuickCharge>False</QuickCharge>
   <ActiveAtStartup>False</ActiveAtStartup>
+  <LowBatteryNotification>False</LowBatteryNotification>
   <CloseMinimizes>False</CloseMinimizes>
   <UseLang />
   <DownloadLang>False</DownloadLang>

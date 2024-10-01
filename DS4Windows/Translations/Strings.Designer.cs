@@ -1874,6 +1874,15 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show low controller battery notification.
+        /// </summary>
+        public static string LowBatteryNotification {
+            get {
+                return ResourceManager.GetString("LowBatteryNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abs Display Monitor.
         /// </summary>
         public static string MainWin_AbsDisplayMonitor {

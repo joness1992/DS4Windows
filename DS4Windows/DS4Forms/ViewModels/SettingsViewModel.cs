@@ -114,6 +114,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         public bool CloseMinimizes { get => DS4Windows.Global.CloseMini; set => DS4Windows.Global.CloseMini = value; }
         public bool QuickCharge { get => DS4Windows.Global.QuickCharge; set => DS4Windows.Global.QuickCharge = value; }
         public bool ActiveAtStartup { get => DS4Windows.Global.ActiveAtStartup; set => DS4Windows.Global.ActiveAtStartup = value; }
+        public bool LowBatteryNotification { get => DS4Windows.Global.LowBatteryNotification; set => DS4Windows.Global.LowBatteryNotification = value; }
 
         public int IconChoiceIndex
         {

@@ -646,4 +646,7 @@
   <data name="UsingAutoTempProfile" xml:space="preserve">
     <value>Controller {0} is using temp Profile "{1}"</value>
   </data>
+  <data name="LowBatteryNotification" xml:space="preserve">
+    <value>Tells Windows to show a taskbar notification when a controller has a low battery</value>
+  </data>
 </root>

@@ -35,6 +35,8 @@ using Nefarius.ViGEm.Client.Targets.DualShock4;
 using static DS4Windows.Util;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using DS4WinWPF;
+using DS4WinWPF.DS4Forms;
 
 namespace DS4Windows
 {
@@ -2142,8 +2144,11 @@ namespace DS4Windows
                 PrepareDevUDPMotion(device, tempIdx);
             }
 
+            device.BatteryChanged += BatteryStateChanged;
             device.StartUpdate();
         }
+        
+        public event EventHandler BatteryStateChanged;
 
         private void BeginPrepareConnectedInputController(DS4Device device, bool showlog = false)
         {

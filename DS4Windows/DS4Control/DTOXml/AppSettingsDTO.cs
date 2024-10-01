@@ -362,6 +362,25 @@ namespace DS4WinWPF.DS4Control.DTOXml
         }
 
         [XmlIgnore]
+        public bool LowBatteryNotification
+        {
+            get; private set;
+        }
+
+        [XmlElement("LowBatteryNotification")]
+        public string LowBatteryNotificationString
+        {
+            get => LowBatteryNotification.ToString();
+            set
+            {
+                if (bool.TryParse(value, out bool temp))
+                {
+                    LowBatteryNotification = temp;
+                }
+            }
+        }
+
+        [XmlIgnore]
         public bool CloseMinimizes
         {
             get; private set;
@@ -830,6 +849,7 @@ namespace DS4WinWPF.DS4Control.DTOXml
             SwipeProfiles = source.swipeProfiles;
             QuickCharge = source.quickCharge;
             ActiveAtStartup = source.activeAtStartup;
+            LowBatteryNotification = source.lowBatteryNotification;
             CloseMinimizes = source.closeMini;
             UseLang = source.useLang;
             DownloadLang = source.downloadLang;
@@ -921,7 +941,9 @@ namespace DS4WinWPF.DS4Control.DTOXml
             destination.lastVersionChecked = LastVersionChecked;
             destination.notifications = Notifications;
             destination.disconnectBTAtStop = DisconnectBTAtStop;
+            destination.swipeProfiles = SwipeProfiles;
             destination.activeAtStartup = ActiveAtStartup;
+            destination.lowBatteryNotification = LowBatteryNotification;
             destination.quickCharge = QuickCharge;
             destination.closeMini = CloseMinimizes;
             destination.useLang = UseLang;

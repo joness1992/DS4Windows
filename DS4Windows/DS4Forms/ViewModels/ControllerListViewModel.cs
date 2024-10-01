@@ -77,6 +77,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
                 controllerCol.Add(temp);
                 controllerDict.Add(idx, temp);
                 currentDev.Removal += Controller_Removal;
+                temp.BatteryStateChanged += BatteryStateChanged;
                 idx++;
             }
 
@@ -84,6 +85,8 @@ namespace DS4WinWPF.DS4Forms.ViewModels
             BindingOperations.EnableCollectionSynchronization(controllerCol, _colListLocker,
                 ColLockCallback);
         }
+
+        public event EventHandler BatteryStateChanged;
 
         private void ColLockCallback(IEnumerable collection, object context,
             Action accessMethod, bool writeAccess)

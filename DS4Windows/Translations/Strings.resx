@@ -1412,4 +1412,7 @@ Please click OK to confirm that you have read the message. Press Cancel to be re
   <data name="ActiveAtStartup" xml:space="preserve">
     <value>Active at Startup</value>
   </data>
+  <data name="LowBatteryNotification" xml:space="preserve">
+    <value>Show low controller battery notification</value>
+  </data>
 </root>

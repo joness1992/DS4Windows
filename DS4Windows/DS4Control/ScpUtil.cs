@@ -1617,6 +1617,12 @@ namespace DS4Windows
             get { return m_Config.activeAtStartup; }
         }
 
+        public static bool LowBatteryNotification
+        {
+            set { m_Config.lowBatteryNotification = value; }
+            get { return m_Config.lowBatteryNotification; }
+        }
+
         public static bool getQuickCharge()
         {
             return m_Config.quickCharge;
@@ -3633,6 +3639,7 @@ namespace DS4Windows
         public bool ds4Mapping = false;
         public bool quickCharge = false;
         public bool activeAtStartup = true;
+        public bool lowBatteryNotification = false;
         public bool closeMini = false;
         public List<SpecialAction> actions = new List<SpecialAction>();
         public List<DS4ControlSettings>[] ds4settings = new List<DS4ControlSettings>[Global.TEST_PROFILE_ITEM_COUNT]
@@ -7742,6 +7749,8 @@ namespace DS4Windows
                     catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/ActiveAtStartup"); Boolean.TryParse(Item.InnerText, out activeAtStartup); }
                     catch { missingSetting = true; }
+                    try { Item = m_Xdoc.SelectSingleNode("/Profile/LowBatteryNotification"); Boolean.TryParse(Item.InnerText, out lowBatteryNotification); }
+                    catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/CloseMinimizes"); Boolean.TryParse(Item.InnerText, out closeMini); }
                     catch { missingSetting = true; }
                     try { Item = m_Xdoc.SelectSingleNode("/Profile/UseLang"); useLang = Item.InnerText; }
@@ -8092,6 +8101,7 @@ namespace DS4Windows
             //XmlNode xmlDS4Mapping = m_Xdoc.CreateNode(XmlNodeType.Element, "UseDS4ForMapping", null); xmlDS4Mapping.InnerText = ds4Mapping.ToString(); rootElement.AppendChild(xmlDS4Mapping);
             XmlNode xmlQuickCharge = m_Xdoc.CreateNode(XmlNodeType.Element, "QuickCharge", null); xmlQuickCharge.InnerText = quickCharge.ToString(); rootElement.AppendChild(xmlQuickCharge);
             XmlNode xmlActiveAtStartup = m_Xdoc.CreateNode(XmlNodeType.Element, "ActiveAtStartup", null); xmlActiveAtStartup.InnerText = activeAtStartup.ToString(); rootElement.AppendChild(xmlActiveAtStartup);
+            XmlNode xmlLowBatteryNotification = m_Xdoc.CreateNode(XmlNodeType.Element, "LowBatteryNotification", null); xmlLowBatteryNotification.InnerText = activeAtStartup.ToString(); rootElement.AppendChild(xmlLowBatteryNotification);
             XmlNode xmlCloseMini = m_Xdoc.CreateNode(XmlNodeType.Element, "CloseMinimizes", null); xmlCloseMini.InnerText = closeMini.ToString(); rootElement.AppendChild(xmlCloseMini);
             XmlNode xmlUseLang = m_Xdoc.CreateNode(XmlNodeType.Element, "UseLang", null); xmlUseLang.InnerText = useLang.ToString(); rootElement.AppendChild(xmlUseLang);
             XmlNode xmlDownloadLang = m_Xdoc.CreateNode(XmlNodeType.Element, "DownloadLang", null); xmlDownloadLang.InnerText = downloadLang.ToString(); rootElement.AppendChild(xmlDownloadLang);

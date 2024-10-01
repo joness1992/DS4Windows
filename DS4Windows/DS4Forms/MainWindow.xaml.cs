@@ -77,6 +77,7 @@ namespace DS4WinWPF.DS4Forms
         private Size oldSize;
         private bool contextclose;
         private bool startMinimized;
+        private bool lowBatteryWarningShown = false;
 
         public ProfileList ProfileListHolder { get => profileListHolder; }
 
@@ -178,6 +179,8 @@ namespace DS4WinWPF.DS4Forms
             timerThread.Start();
             // Wait for thread tasks to finish before continuing
             timerThread.Join();
+
+            App.rootHub.BatteryStateChanged += BatteryStateChanged;
         }
 
         public void LateChecks(ArgumentParser parser)
@@ -191,10 +194,10 @@ namespace DS4WinWPF.DS4Forms
                     {
                         Dispatcher.BeginInvoke(() =>
                         {
-                        StartStopBtn.IsEnabled = false;
+                            StartStopBtn.IsEnabled = false;
                         });
-                    Thread.Sleep(1000);
-                    App.rootHub.Start();
+                        Thread.Sleep(1000);
+                        App.rootHub.Start();
                     }
                     //root.rootHubtest.Start();
                 }
@@ -305,6 +308,23 @@ namespace DS4WinWPF.DS4Forms
         private void TrayIconVM_RequestMinimize(object sender, EventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void BatteryStateChanged(object sender, EventArgs e)
+        {
+            if (Global.LowBatteryNotification && Program.rootHub.activeControllers > 0)
+            {
+                for (int i = 0; i < Program.rootHub.DS4Controllers.Length; i++)
+                {
+                    DS4Device device = Program.rootHub.DS4Controllers[i];
+                    if (device != null && device.Battery <= 20)
+                    {
+                        string warning = $"Battery on controller in slot {i + 1} [{device.DisplayName}] has a low battery and needs to recharge.";
+                        notifyIcon.ShowNotification(TrayIconViewModel.ballonTitle,
+                        warning, NotificationIcon.Warning);
+                    }
+                }
+            }
         }
 
         private void TrayIconVM_ProfileSelected(TrayIconViewModel sender,
